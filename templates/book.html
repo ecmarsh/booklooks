@@ -1,0 +1,168 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    {{ book.title }}
+{% endblock %}
+
+<!-- Macros -->
+	<!-- Renders form rating in stars -->
+	{% macro radio(value, name='rating', type='radio') -%}
+		<div class="form-check form-check-inline rating">
+			<input name="rating"
+				   class="form-check-input rating"
+				   type="{{ type }}"
+				   id="rating-{{ value }}"
+				   value="{{ value }}"
+				   oninput="styleStars(event)"
+				   required
+				   >
+			<label class="form-check-label" for="rating-{{ value }}">
+				<svg height="25" width="23" class="star form-item">
+					<polygon points="9.9, 1.1, 3.3, 21.78, 19.8, 8.58, 0, 8.58, 16.5, 21.78" stroke-width="1" style="fill-rule:nonzero;" />
+				</svg>
+			</label>
+		</div>
+	{%- endmacro %}
+
+	<!-- Renders review rating to stars -->
+	{% macro stars(count) -%}
+		{% for i in range(count) %}
+		<svg height="25" width="23" class="star gold">
+			<polygon points="9.9, 1.1, 3.3, 21.78, 19.8, 8.58, 0, 8.58, 16.5, 21.78" style="fill-rule:nonzero;" />
+		</svg>
+		{% endfor %}
+		{% for i in range(5 - count) %}
+		<svg height="25" width="23" class="star muted">
+			<polygon points="9.9, 1.1, 3.3, 21.78, 19.8, 8.58, 0, 8.58, 16.5, 21.78" style="fill-rule:nonzero;" />
+		</svg>
+		{% endfor %}
+	{%- endmacro %}
+<!-- End Macros -->
+
+{% block main %}
+
+	<hr><h2>{{ book.title }}</h2><hr>
+
+	<div class="row">
+		<section class="book__detail col-sm-6 mb-4">
+			<figure class="book__cover">
+				<img class="book__cover-img" src="http://covers.openlibrary.org/b/isbn/{{book.isbn}}-M.jpg" alt="cover for book called {{book.title}}" />
+				<figcaption class="book__cover-caption">
+					Image courtesy of <a class="ml-1 text-secondary" href="http://openlibrary.org/isbn/{{book.isbn}}" target="_blank"> openlibrary.org</a>
+				</figcaption>
+			</figure>
+			<div class="book__specs">
+				{% for key, value in book.items() %}
+				<div class="book__spec book__spec-{{key}}">
+					<span class="book__spec-key">{{key.upper()}}:</span> <span class="book__spec-value">{{value}}</span></div>
+				{% else %}
+				<h5>Sorry, we don't seem to have that book!</h5>
+				{% endfor %}
+			</div>
+		</section>
+
+		<section class="reviews col-sm-6">
+			<h4 class="mb-3">Ratings</h4>
+			<div class="goodreads-review-wrapper my-4">
+				<h5>goodreads</h5>
+				<p style="font-size: larger">
+						<span class="gold" style="font-size: larger">
+							{{ formatRating(thirdparty_ratings.avg) }} / 5
+						</span>
+					<span class="text-muted">
+						<small> ({{thirdparty_ratings.count}} Reviews)</small>
+					</span>
+				</p>
+			</div>
+
+			<h5 class="mt-4 mb-1">BookLooks</h5>
+				<p style="font-size: larger">
+					{% if review_detail %}
+						<span class="gold" style="font-size: larger">
+							{{ formatRating(review_summary.avg) }} / 5
+						</span>
+						<span class="text-muted">
+							<small> ({{ review_summary.count }} Review{% if review_summary.count > 1 %}s{% endif %})</small>
+						</span>
+						<ul class="review__list mt-4">
+						{% for review in review_detail  %}
+							<li class="review__item py-3 pr-1">
+								<div class="review-container">
+									<p class="review__stamp">
+										<span class="review__stamp--username">
+											'{{review.username}}'
+										</span>
+										<br>
+										{{review.stamp}}
+									</p>
+									<p class="review__rating">
+										{{ stars(review.rating) }}
+									</p>
+									<p class="review__text mr-1">
+										{{review.text or ''}}
+									</p>
+								</div>
+							</li>
+						{% endfor %}
+						</ul>
+					{% elif not review_detail %}
+						No Reviews Yet.
+						<button type="button"
+								onclick="startReview()"
+								class="gold"
+								style="border:none; background: transparent;"
+								>
+							Be the first!
+						</button>
+					{% endif %}
+				</p>
+			</div>
+		</div>
+
+		<hr>
+
+		<!-- User Review or Leave A Review-->
+		{% if users_review %}
+			<h4 class="mb-4"> Your Rating </h4>
+			<div class="gold">
+				{{ users_review.rating }} / 5
+				<div class="stars mt-2">
+					{{ stars(users_review.rating) }}
+				</div>
+			</div>
+		{% else %}
+			<h4 class="mb-4"> Leave A Review </h4>
+
+			<form id="rating" action="/review/{{ book.id }}" method="POST">
+				<span style="font-style: italic; font-size: smaller" class="text-muted mr-4">Hated It</span>
+				# for i in range(1,6):
+					{{ radio(i)}}
+				# endfor
+				<span style="font-style: italic; font-size: smaller" class="text-muted">Best book ever!</span>
+
+				<div class="form-group mt-4" style="display:block;">
+					<label for="review-text" style="display: block; font-size: 1.1em">
+						What did you think about '{{ book.title }}'?
+					</label>
+					<textarea
+						name="review-text"
+						placeholder="Share your thoughts..."
+						class="form-control review-text"
+						id="review-text"
+						rows="4"
+					></textarea>
+				</div>
+
+				<div class="form-submit">
+					<button type="submit" class="btn btn-primary">
+						Submit Rating
+					</button>
+				</div>
+
+			</form>
+		{% endif %}
+	</section>
+
+	<script src="{{url_for('static', filename='js/book.js')}}"></script>
+
+{% endblock %}

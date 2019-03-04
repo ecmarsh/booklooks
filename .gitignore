@@ -1,0 +1,7 @@
+__pycache__/
+.vscode/
+flask/
+flask_session/
+specs.md
+env/
+.webassets-cache/

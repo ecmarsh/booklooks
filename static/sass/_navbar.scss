@@ -1,0 +1,55 @@
+.navbar {
+	&-brand {
+		font-size: 1.6em;
+
+		& span {
+			transform: translateY(2px);
+			display: inline-block;
+			font-size: 1.1em;
+			text-shadow: -2px -1px 5px rgba($gold, 0.9);
+			margin-left: 2px;
+		}
+	}
+
+	&.bg-dark {
+		background-color: $black !important;
+	}
+}
+
+input.navbar-search {
+	border-radius: 5px;
+	height: 2.25rem;
+	background: $black !important;
+	width: 180px;
+	transition: all 0.3s ease-in-out !important;
+
+	& + button > svg {
+		fill: $grey;
+	}
+
+	&:focus {
+		color: white;
+		width: 226px;
+
+		& + button > svg {
+			fill: $white;
+		}
+	}
+}
+
+button.navbar-search-button {
+	background: transparent !important;
+	outline: none;
+	border: none;
+	transform: translate3d(-2rem, 2px, 0);
+}
+
+@media screen and (max-width: 767px) {
+	a.nav-link {
+		margin-left: 30px;
+	}
+
+	li.nav-item:first-child {
+		margin-top: 10px;
+	}
+}

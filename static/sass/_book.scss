@@ -1,0 +1,52 @@
+.book__cover {
+	&-img {
+		box-shadow: 0 0px 5px rgba($grey, 0.9);
+		border-radius: 3px;
+		filter: brightness(120%) contrast(120%);
+		margin-bottom: 5%;
+		background: linear-gradient(
+				to bottom,
+				rgba(255, 255, 255, 0.2),
+				rgba(0, 0, 0, 0)
+			),
+			url('assets/no-cover.png');
+		background-repeat: no-repeat;
+		background-size: auto;
+		min-height: 200px;
+		min-width: 100px;
+	}
+	&-caption {
+		display: flex;
+		font-size: 0.6em;
+		justify-content: center;
+	}
+}
+
+.book__specs {
+	text-align: right;
+	display: flex;
+	flex-direction: column;
+
+	.book__spec {
+		display: flex;
+		justify-content: space-around;
+		text-align: left;
+		transform: translateX(20%);
+		&-key {
+			flex: 1 0 20%;
+			font-size: 0.9em;
+			opacity: 0.8;
+			text-align: right;
+			margin-right: 10px;
+		}
+		&-value {
+			flex: 2 2 70%;
+		}
+		&-id {
+			display: none;
+		}
+		&-isbn {
+			order: 5;
+		}
+	}
+}

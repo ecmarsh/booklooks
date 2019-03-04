@@ -1,0 +1,56 @@
+main .form-control,
+main .form-inline {
+	display: inline-block;
+	width: auto;
+}
+
+.form-control {
+	border: 2px solid $grey;
+
+	&:not(.navbar-search):focus {
+		border: 2px solid $gold !important;
+	}
+
+	&.navbar-search {
+		border: 0 solid $almostBlack !important;
+	}
+}
+
+.invalid-feedback {
+	display: block !important;
+	visibility: hidden;
+	font-size: 0.9em;
+	margin-bottom: 5px;
+	transition: 0.2s ease-out;
+
+	&.is-visible {
+		visibility: visible;
+	}
+}
+
+.was-validated .form-control:valid,
+.form-control.is-valid,
+.was-validated .form-control:invalid,
+.form-control.is-invalid {
+	padding-right: 2rem !important;
+}
+
+.no-account {
+	font-size: 0.8em;
+	margin-top: 10px;
+}
+
+button:focus {
+	outline-color: rgba($gold, 0.7);
+}
+
+button[type='submit'] {
+	background: linear-gradient(to top, $gold 0%, $goldLight 100%);
+	color: $almostBlack;
+	letter-spacing: 1px;
+	&:hover {
+		background: linear-gradient(to bottom, $gold 0%, $goldDark 100%);
+		cursor: pointer;
+		color: $almostBlack;
+	}
+}

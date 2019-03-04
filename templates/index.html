@@ -1,0 +1,30 @@
+{% extends "layout.html" %} {% block title %} Welcome {% endblock %} {% block
+main %}
+<div id="home-page">
+	<h2 class="mb-4 text-primary">Find a book</h2>
+	<div>
+		<form
+			id="search"
+			class="form-inline mr-auto mb-4"
+			action="/search"
+			method="GET"
+		>
+			<input
+				autofocus
+				autocomplete="off"
+				class="form-control mr-sm-2 pl-3"
+				type="text"
+				id="query"
+				name="q"
+				placeholder="Title, author, ISBN-10..."
+				aria-label="Search"
+				required
+			/>
+			<button class="btn btn-primary btn-rounded my-2 py-2" type="submit">
+				Search
+			</button>
+		</form>
+	</div>
+</div>
+
+{% endblock %}

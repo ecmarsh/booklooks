@@ -1,0 +1,49 @@
+{% extends "layout.html" %}
+
+{% block title %} Search {% endblock %}
+
+{% block main %}
+	<div id="search-page">
+		<h3 class="mb-4">
+			{% if not query %} Browse {% else %}
+			<span class="text-muted">Showing results with</span>
+			'{{ query }}' {% endif %}
+		</h3>
+
+		{% if browse or not query %}
+			<ul class="alphabet-links"></ul>
+			<script src="{{url_for('static', filename='js/browse.js')}}"></script>
+		{% endif %}
+
+		<ul class="book__list">
+			{% for item in results %}
+				<li class="book__item">
+					<a href="/book/{{ item['id'] }}" class="book-link">
+						<div class="book__container">
+							<h3 class="title">
+								{{ item.title }}
+							</h3>
+
+							<span class="author">
+								{{ item.author }}
+							</span>
+
+							<span class="year">
+								{{ item.year }}
+							</span>
+
+							<span class="isbn">
+								<small>{{ item.isbn }}</small>
+							</span>
+						</div>
+					</a>
+				</li>
+			{% else %}
+				<div style="grid-column: span 4; width: 100%; text-align: center;">
+					<h5 class="mt-4 mb-4">Sorry, no books match your search.</h5>
+					<a style="font-size: larger" href="/">Try again?</a>
+				</div>
+			{% endfor %}
+		</ul>
+	</div>
+{% endblock %}

@@ -1,0 +1,97 @@
+.reviews h5 {
+	text-decoration: underline;
+	text-decoration-color: $grey;
+}
+
+.review {
+	&__list {
+		list-style: none;
+		overflow: scroll;
+		max-height: 40vh;
+	}
+
+	&__item {
+		background: $almostBlack;
+
+		&:first-child {
+			padding-top: 1rem;
+		}
+	}
+
+	&-container {
+		display: grid;
+		grid-template-columns: 2fr 3fr;
+		grid-template-rows: 1fr auto;
+		justify-items: start;
+		align-items: start;
+	}
+
+	&__stamp {
+		color: $grey;
+		grid-column: 1 / span 1;
+		grid-row: 1 / span 1;
+		padding-left: 1rem;
+		font-size: 0.6em;
+
+		&--username {
+			font-style: italic;
+			font-size: 1.2em;
+		}
+	}
+
+	&__rating {
+		opacity: 0.9;
+		grid-column: 2 / -1;
+		grid-row: 1 / span 1;
+
+		svg.star {
+			transform: scale(0.8);
+		}
+	}
+
+	&__text {
+		grid-column: 2 / -1;
+		grid-row: 2 / -1;
+		font-style: italic;
+		font-size: 90%;
+		color: $greyLight;
+	}
+}
+
+// Submission Form
+.form-control.review-text {
+	height: 200px;
+	@media screen and (max-width: 992px) {
+		width: 90%;
+	}
+	@media screen and (min-width: 992px) {
+		width: 40vw;
+	}
+}
+
+input.rating {
+	opacity: 0;
+	width: 0;
+	height: 0;
+}
+
+div.form-check.rating > label:hover {
+	cursor: pointer;
+
+	& > svg > polygon {
+		stroke: $gold;
+		paint-order: stroke;
+	}
+}
+
+svg.star {
+	polygon {
+		fill: $greyLight;
+	}
+	&.gold > polygon {
+		fill: $gold;
+	}
+	&.muted > polygon {
+		fill: $almostBlack;
+	}
+}

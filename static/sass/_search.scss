@@ -1,0 +1,82 @@
+.alphabet-links {
+	display: flex;
+	justify-content: space-evenly;
+	max-width: 90%;
+	margin: 0 auto;
+
+	a.char-search {
+		color: $greyLight;
+
+		&:hover {
+			color: $gold;
+		}
+	}
+}
+
+.book {
+	&__list {
+		margin: 0 auto;
+		display: flex;
+		flex-wrap: wrap;
+		max-width: 992px;
+	}
+
+	&-link {
+		color: $almostWhite !important;
+
+		&:hover {
+			text-decoration: none;
+			color: $white;
+
+			div.book__container {
+				border: 1px solid $white;
+				text-decoration: none !important;
+			}
+		}
+	}
+
+	&__container {
+		display: flex;
+		flex-direction: column;
+		justify-content: space-around;
+		color: $white;
+		background-image: linear-gradient(to bottom, #333, #000);
+		padding: 15% 5% 1rem;
+		border-radius: 5px;
+		border: 1px solid $grey;
+		height: 100%;
+		transition: all 0.2s ease;
+
+		.title {
+			font-size: 1.2em;
+			text-decoration: underline;
+			margin: 2rem 0 1rem;
+		}
+
+		.year {
+			margin-bottom: 2rem;
+		}
+
+		.isbn {
+			font-size: 0.8em;
+			margin-bottom: 1rem;
+		}
+	}
+
+	&__item {
+		display: block;
+		flex: 24%;
+		max-width: 24%;
+		margin: 2px;
+
+		@media screen and (max-width: 800px) {
+			flex: 48%;
+			max-width: 48%;
+		}
+
+		@media screen and (max-width: 600px) {
+			flex: 95%;
+			max-width: 95%;
+		}
+	}
+}
