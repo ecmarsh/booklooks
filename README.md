@@ -2,8 +2,6 @@
 
 ![booklooks logo](.github/readme-entry.png)
 
-## Demo: **[BookLooks App](https://booklooks.herokuapp.com)**
-
 Create an account to find and review books,and check book ratings from others on BookLooks and via third-party API, Goodreads.
 
 ## **Project**
