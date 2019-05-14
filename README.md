@@ -8,7 +8,9 @@ Create an account to find and review books,and check book ratings from others on
 
 ---
 
-**[CS50w](https://courses.edx.org/courses/course-v1:HarvardX+CS50W+Web/course/)** - Web Programming
+**[CS50W - Web Programming](https://courses.edx.org/courses/course-v1:HarvardX+CS50W+Web/course/)**
+
+**Video Submission**: [https://youtu.be/Tij1Kv7Rt7E](https://youtu.be/Tij1Kv7Rt7E)
 
 **Project1**
 
